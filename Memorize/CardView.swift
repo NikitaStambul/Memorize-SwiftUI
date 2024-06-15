@@ -21,10 +21,12 @@ struct CardView: View {
                     .aspectRatio(1, contentMode: .fit)
                     .multilineTextAlignment(.center)
                     .padding(Constants.Pie.inset)
+                    .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+                    .animation(.spin(duration: 1), value: card.isMatched)
             )
             .padding(Constants.inset)
             .cardify(isFaceUp: card.isFaceUp)
-            .opacity(card.isFaceUp ? 1 : 0)
+            .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
     }
     
     init(_ card: Card) {
@@ -48,6 +50,12 @@ struct CardView: View {
     }
 }
 
+extension Animation {
+    static func spin(duration: TimeInterval) -> Animation {
+        .linear(duration: 1).repeatForever(autoreverses: false)
+    }
+}
+
 #Preview {
     typealias Card = CardView.Card
     
@@ -55,7 +63,7 @@ struct CardView: View {
         HStack {
             CardView(Card(isFaceUp: true, content: "👻", id: "1a"))
 //            CardView(Card(content: "X", id: "2a"))
-            CardView(Card(isFaceUp: true, content: "X", id: "1a"))
+            CardView(Card(isFaceUp: false, content: "X", id: "1a"))
         }
         HStack {
             CardView(Card(isFaceUp: true, content: "This is a very long string and I hope it's fits", id: "1a"))

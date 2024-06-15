@@ -23,8 +23,6 @@ struct Pie: Shape {
             x: center.x + radius * cos(startAngle.radians),
             y: center.y + radius * sin(startAngle.radians)
         )
-        
-        print(start)
 
         var p = Path()
 
