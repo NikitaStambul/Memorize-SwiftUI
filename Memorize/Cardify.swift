@@ -27,7 +27,7 @@ struct Cardify: ViewModifier, Animatable {
                 .overlay(content)
                 .opacity(isFaceUp ? 1 : 0)
 
-            base.fill(.orange)
+            base
                 .opacity(isFaceUp ? 0 : 1)
         }
         .rotation3DEffect(.degrees(rotation), axis: (0, 1, 0))
